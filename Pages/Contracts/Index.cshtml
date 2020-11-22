@@ -1,0 +1,78 @@
+﻿@page
+@model KareAjans.Pages.Contracts.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Contracts</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<form asp-page="./Index" method="get">
+    <div class="form-group">
+        <input class="form-control my-2" type="text" placeholder="Search for contracts by actor/staff name..." name="SearchString" value="@Model.CurrentFilter" />
+        <input type="submit" value="Search" class="btn btn-primary mr-2" />
+        <a asp-page="./Index" class="my-auto">Back to list</a>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@(Model.CurrentSort == "Actor" ? "Actor_desc" : "Actor")" asp-route-searchString="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Contract[0].Actor)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@(Model.CurrentSort == "ManagingStaff" ? "ManagingStaff_desc" : "ManagingStaff")" asp-route-searchString="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Contract[0].ManagingStaff)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@(Model.CurrentSort == "StartDate" ? "StartDate_desc" : "StartDate")" asp-route-searchString="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Contract[0].StartDate)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@(Model.CurrentSort == "EndDate" ? "EndDate_desc" : "EndDate")" asp-route-searchString="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Contract[0].EndDate)
+                </a>
+            </th>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@(Model.CurrentSort == "TotalPrice" ? "TotalPrice_desc" : "TotalPrice")" asp-route-searchString="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Contract[0].TotalPrice)
+                </a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Contract)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Actor, "ActorTemplate")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ManagingStaff, "StaffTemplate")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

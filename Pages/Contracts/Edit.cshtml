@@ -1,0 +1,57 @@
+﻿@page
+@model KareAjans.Pages.Contracts.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Contract</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Contract.ID" />
+            <div class="form-group">
+                <label asp-for="Contract.Actor" class="control-label"></label>
+                <select asp-for="Contract.ActorID" asp-items="@Model.ActorSL" class="form-control">
+                </select>
+                <span asp-validation-for="Contract.Actor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contract.ManagingStaff" class="control-label"></label>
+                <select asp-for="Contract.ManagingStaffID" asp-items="@Model.ManagingStaffSL" class="form-control">
+                </select>
+                <span asp-validation-for="Contract.ManagingStaff" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contract.StartDate" class="control-label"></label>
+                <input asp-for="Contract.StartDate" class="form-control" />
+                <span asp-validation-for="Contract.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contract.EndDate" class="control-label"></label>
+                <input asp-for="Contract.EndDate" class="form-control" />
+                <span asp-validation-for="Contract.EndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Contract.TotalPrice" class="control-label"></label>
+                <input asp-for="Contract.TotalPrice" class="form-control" />
+                <span asp-validation-for="Contract.TotalPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
