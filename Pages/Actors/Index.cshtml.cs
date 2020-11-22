@@ -30,6 +30,7 @@ namespace KareAjans.Pages.Actors
             CurrentFilter = searchString;
             if (!String.IsNullOrEmpty(searchString))
             {
+                // For performance reasons, the search is done solely on the SQL DB side. For improved UX this could be changed to search in a.FullName instead, but that would most likely require the query to be executed in-memory.
                 actorsIQ = actorsIQ.Where(a => a.FirstName.Contains(searchString) || a.LastName.Contains(searchString));
             }
 

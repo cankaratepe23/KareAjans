@@ -30,6 +30,7 @@ namespace KareAjans.Pages.Contracts
             CurrentFilter = searchString;
             if (!String.IsNullOrEmpty(searchString))
             {
+                // For performance reasons, the search is done solely on the SQL DB side. For improved UX this could be changed to search in a.FullName instead, but that would most likely require the query to be executed in-memory.
                 contractsIQ = contractsIQ.Where(c => c.Actor.FirstName.Contains(searchString) || c.Actor.LastName.Contains(searchString) || c.ManagingStaff.FirstName.Contains(searchString) || c.ManagingStaff.LastName.Contains(searchString));
             }
 
